@@ -3,37 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Grafos
+namespace Grafos {
 	/// <summary>
 	/// Armazena o resultado da execução do algoritmo de Prim.
 	/// </summary>
 	public class ResultadoPrim {
-		public List<Aresta> Arestas { get; private set; }
-		public double PesoTotal { get; private set; }
-		public bool Sucesso { get; private set; }
-		public string? MensagemErro { get; private set; }
+		private List<Aresta> _arestas;
+		private double _pesoTotal;
+		private bool _sucesso;
+		private string? _mensagemErro;
 
 		public ResultadoPrim() {
-			Arestas = new List<Aresta>();
-			PesoTotal = 0;
-			Sucesso = true;
-			MensagemErro = null;
+			_arestas = new List<Aresta>();
+			_pesoTotal = 0;
+			_sucesso = true;
+			_mensagemErro = null;
+		}
+
+		public IReadOnlyList<Aresta> GetArestas() {
+			return _arestas.AsReadOnly();
+		}
+
+		public Aresta GetAresta(int index) {
+			if (index < 0 || index >= _arestas.Count) {
+				throw new IndexOutOfRangeException("Índice de aresta inválido.");
+			}
+			return _arestas[index];
+		}
+
+		public double GetPesoTotal() {
+			return _pesoTotal;
+		}
+
+		public bool GetSucesso() {
+			return _sucesso;
+		}
+
+		public string? GetMensagemErro() {
+			return _mensagemErro;
 		}
 
 		public void AdicionarAresta(Aresta aresta) {
-			Arestas.Add(aresta);
-			PesoTotal += aresta.Peso;
+			_arestas.Add(aresta);
+			_pesoTotal += aresta.Peso;
 		}
 
 		public void DefinirErro(string mensagem) {
-			Sucesso = false;
-			MensagemErro = mensagem;
+			_sucesso = false;
+			_mensagemErro = mensagem;
 		}
 
 		public void Limpar() {
-			Arestas.Clear();
-			PesoTotal = 0;
-			Sucesso = false;
+			_arestas.Clear();
+			_pesoTotal = 0;
+			_sucesso = false;
 		}
 	}
 }
