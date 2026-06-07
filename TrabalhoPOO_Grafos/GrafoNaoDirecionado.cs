@@ -1,6 +1,7 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
-public class Class1
+namespace TrabalhoPOO_Grafos
 {
     public class GrafoNaoDirecionado : Grafo
     {
@@ -20,9 +21,14 @@ public class Class1
 
         public override void AdicionaAresta(Aresta novo)
         {
+            if (!listaAdjacencia.ContainsKey(novo.GetOrigem()))
+                AdicionaVertice(new Vertice(novo.GetOrigem()));
+
+            if (!listaAdjacencia.ContainsKey(novo.GetDestino()))
+                AdicionaVertice(new Vertice(novo.GetDestino()));
+
             listaAdjacencia[novo.GetOrigem()].Add(novo);
 
-            // Nao-direcionado: adiciona a aresta simetrica
             Aresta simetrica = new Aresta(novo.GetDestino(), novo.GetOrigem(), novo.GetPeso());
             listaAdjacencia[novo.GetDestino()].Add(simetrica);
         }
@@ -31,14 +37,17 @@ public class Class1
         {
             if (listaAdjacencia.ContainsKey(nomeVertice))
                 return listaAdjacencia[nomeVertice];
+
             return new List<Aresta>();
         }
 
         public override List<Vertice> GetVertices()
         {
-            var lista = new List<Vertice>();
-            foreach (var chave in listaAdjacencia.Keys)
+            List<Vertice> lista = new List<Vertice>();
+
+            foreach (string chave in listaAdjacencia.Keys)
                 lista.Add(new Vertice(chave));
+
             return lista;
         }
 

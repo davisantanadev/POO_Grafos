@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "TrabalhoPOO_Grafos/1.0.0": {
+        "runtime": {
+          "TrabalhoPOO_Grafos.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TrabalhoPOO_Grafos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
