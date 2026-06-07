@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lldav\\OneDrive\\Área de Trabalho\\TERCEIRO PERIODO\\POO\\TrabalhoGrafos\\POO_Grafos\\TrabalhoPOO_Grafos\\TrabalhoPOO_Grafos.csproj",
+      "projectUniqueName": "C:\\Users\\lldav\\OneDrive\\Área de Trabalho\\TERCEIRO PERIODO\\POO\\TrabalhoPOO\\POO_Grafos\\TrabalhoPOO_Grafos\\TrabalhoPOO_Grafos.csproj",
       "projectName": "TrabalhoPOO_Grafos",
-      "projectPath": "C:\\Users\\lldav\\OneDrive\\Área de Trabalho\\TERCEIRO PERIODO\\POO\\TrabalhoGrafos\\POO_Grafos\\TrabalhoPOO_Grafos\\TrabalhoPOO_Grafos.csproj",
+      "projectPath": "C:\\Users\\lldav\\OneDrive\\Área de Trabalho\\TERCEIRO PERIODO\\POO\\TrabalhoPOO\\POO_Grafos\\TrabalhoPOO_Grafos\\TrabalhoPOO_Grafos.csproj",
       "packagesPath": "C:\\Users\\lldav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lldav\\OneDrive\\Área de Trabalho\\TERCEIRO PERIODO\\POO\\TrabalhoGrafos\\POO_Grafos\\TrabalhoPOO_Grafos\\obj\\",
+      "outputPath": "C:\\Users\\lldav\\OneDrive\\Área de Trabalho\\TERCEIRO PERIODO\\POO\\TrabalhoPOO\\POO_Grafos\\TrabalhoPOO_Grafos\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
