@@ -1,33 +1,31 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace TrabalhoPOO_Grafos
 {
     public class Aresta
     {
-        private int origem;
-        private int destino;
+        private string origem;
+        private string destino;
         private int peso;
 
-        public Aresta(int origem, int destino, int peso)
+        public Aresta(string origem, string destino, int peso)
         {
             this.origem = origem;
             this.destino = destino;
             this.peso = peso;
         }
-        public int GetOrigem()
-        { 
+
+        public string GetOrigem()
+        {
             return this.origem;
         }
-        public int GetDestino() 
-        { 
-            return rhis.destino; 
+
+        public string GetDestino()
+        {
+            return this.destino;
         }
-        public int getPeso() 
-        { 
-            return this.peso; 
+
+        public int GetPeso()
+        {
+            return this.peso;
         }
     }
 }
