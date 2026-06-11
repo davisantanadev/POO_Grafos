@@ -10,70 +10,56 @@ namespace TrabalhoPOO_Grafos
         static void Main(string[] args)
         {
 
-            Console.WriteLine("=================================");
-            Console.WriteLine(" TRABALHO POO - GRAFOS");
-            Console.WriteLine(" Árvore Geradora Mínima - Prim");
-            Console.WriteLine("=================================\n");
+            Console.WriteLine("=== Arvore Geradora Minima - Algoritmo de Prim ===");
+
+            Console.Write("Informe o caminho do arquivo CSV: ");
+            string? caminho = Console.ReadLine();
+
+            Console.Write("Informe o vertice inicial: ");
+            string? verticeInicial = Console.ReadLine();
 
             try
             {
-                LeitorCSV leitor = new LeitorCSV();
-
-                Grafo grafo = leitor.LerGrafo();
-
-                Console.WriteLine("Grafo carregado com sucesso!");
-                Console.WriteLine($"Quantidade de vértices: {grafo.GetVertices().Count}");
-
-                Console.WriteLine("\nVértices encontrados:");
-
-                foreach (Vertice v in grafo.GetVertices())
+                if (string.IsNullOrWhiteSpace(caminho))
                 {
-                    Console.Write(v.GetNome() + " ");
+                    Console.WriteLine("Erro: caminho do arquivo inválido.");
+                    return;
                 }
-
-                Console.WriteLine();
-
-                Console.Write("\nDigite o vértice inicial: ");
-                string? verticeInicial = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(verticeInicial))
                 {
-                    Console.WriteLine("Vértice inválido.");
+                    Console.WriteLine("Erro: vértice inicial inválido.");
                     return;
                 }
+
+                LeitorCSV leitor = new LeitorCSV(caminho);
+
+                Grafo grafo = leitor.LerGrafo();
 
                 GrafoNaoDirecionado g = (GrafoNaoDirecionado)grafo;
 
                 if (!g.ExisteVertice(verticeInicial))
                 {
-                    Console.WriteLine("O vértice informado não existe no grafo.");
+                    Console.WriteLine("Erro: vértice inicial inexistente.");
+                    return;
+                }
+
+                if (!grafo.EConexo())
+                {
+                    Console.WriteLine("Erro: o grafo é desconexo.");
                     return;
                 }
 
                 Console.WriteLine();
+                Console.WriteLine("Arvore geradora de peso minimo:");
 
-                if (!grafo.EConexo())
-                {
-                    Console.WriteLine("Não é possível gerar uma árvore geradora mínima.");
-                    Console.WriteLine("O grafo não é conexo.");
-                    return;
-                }
+                // A implementação da ArvoreMTS será chamada aqui
 
-                Console.WriteLine("O grafo é conexo.");
-                Console.WriteLine($"Vértice inicial escolhido: {verticeInicial}");
-
-                Console.WriteLine("\nA implementação do algoritmo de Prim será executada aqui.");
-
-             
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro:");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Erro: {ex.Message}");
             }
-
-            Console.WriteLine("\nPressione qualquer tecla para sair...");
-            Console.ReadKey();
 
         }
     }
