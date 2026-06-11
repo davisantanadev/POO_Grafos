@@ -4,11 +4,11 @@ namespace TrabalhoPOO_Grafos
 {
     public class LeitorCSV
     {
-        public string caminho = "ArquivosCSV/grafo_nao_direcionado_32_vertices.csv";
+        public string caminho = "ArquivosCSV/grafo_nao_direcionado_4096_vertices.csv";
 
         public LeitorCSV()
         {
-            caminho = "ArquivosCSV/grafo_nao_direcionado_32_vertices.csv";
+            caminho = "ArquivosCSV/grafo_nao_direcionado_4096_vertices.csv";
         }
 
         public LeitorCSV(string caminho)
@@ -52,19 +52,15 @@ namespace TrabalhoPOO_Grafos
 
         private string EncontrarArquivo()
         {
-            if (File.Exists(caminho))
-            {
-                return caminho;
-            }
+            string caminhoCompleto = Path.GetFullPath(
+                Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    @"..\..\..\ArquivosCSV",
+                    Path.GetFileName(caminho)
+                )
+            );
 
-            string caminhoDentroDoProjeto = Path.Combine("TrabalhoPOO_Grafos", caminho);
-
-            if (File.Exists(caminhoDentroDoProjeto))
-            {
-                return caminhoDentroDoProjeto;
-            }
-
-            return caminho;
+            return caminhoCompleto;
         }
     }
 }

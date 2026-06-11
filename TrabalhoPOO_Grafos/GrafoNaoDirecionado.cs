@@ -6,17 +6,24 @@ namespace TrabalhoPOO_Grafos
     public class GrafoNaoDirecionado : Grafo
     {
         private Dictionary<string, List<Aresta>> listaAdjacencia;
+        private Dictionary<string, Vertice> vertices;
 
         public GrafoNaoDirecionado()
         {
             this.listaAdjacencia = new Dictionary<string, List<Aresta>>(
+                StringComparer.OrdinalIgnoreCase);
+
+            this.vertices = new Dictionary<string, Vertice>(
                 StringComparer.OrdinalIgnoreCase);
         }
 
         public override void AdicionaVertice(Vertice novo)
         {
             if (!listaAdjacencia.ContainsKey(novo.GetNome()))
+            {
                 listaAdjacencia.Add(novo.GetNome(), new List<Aresta>());
+                vertices.Add(novo.GetNome(), novo);
+            }
         }
 
         public override void AdicionaAresta(Aresta novo)
@@ -41,14 +48,17 @@ namespace TrabalhoPOO_Grafos
             return new List<Aresta>();
         }
 
+        public Vertice? GetVertice(string nome)
+        {
+            if (vertices.ContainsKey(nome))
+                return vertices[nome];
+
+            return null;
+        }
+
         public override List<Vertice> GetVertices()
         {
-            List<Vertice> lista = new List<Vertice>();
-
-            foreach (string chave in listaAdjacencia.Keys)
-                lista.Add(new Vertice(chave));
-
-            return lista;
+            return new List<Vertice>(vertices.Values);
         }
 
         public bool ExisteVertice(string nome)
