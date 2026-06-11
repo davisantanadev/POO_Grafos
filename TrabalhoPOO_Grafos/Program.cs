@@ -53,7 +53,21 @@ namespace TrabalhoPOO_Grafos
                 Console.WriteLine();
                 Console.WriteLine("Arvore geradora de peso minimo:");
 
-                // A implementação da ArvoreMTS será chamada aqui
+                ArvoreMTS prim = new ArvoreMTS();
+                ResultadoPrim resultado = prim.Calcular(grafo, verticeInicial);
+
+                if (!resultado.GetSucesso())
+                {
+                    Console.WriteLine($"Erro ao calcular árvore geradora mínima: {resultado.GetMensagemErro()}");
+                    return;
+                }
+
+                foreach (Aresta a in resultado.GetArestas())
+                {
+                    Console.WriteLine($"{a.GetOrigem()} -> {a.GetDestino()} (peso: {a.GetPeso()})");
+                }
+
+                Console.WriteLine($"Peso total: {resultado.GetPesoTotal()}");
 
             }
             catch (Exception ex)

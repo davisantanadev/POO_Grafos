@@ -10,13 +10,13 @@ namespace TrabalhoPOO_Grafos
     /// </summary>
     public class ArvoreMTS
     {
-        /// <summary>
-        /// Calcula a árvore geradora mínima a partir de um vértice inicial.
-        /// </summary>
-        /// <param name="grafo">Grafo de entrada.</param>
-        /// <param name="idVerticeInicial">Id do vértice inicial.</param>
-        /// <returns>Resultado da execução do algoritmo.</returns>
-        public ResultadoPrim Calcular(Grafo grafo, int idVerticeInicial)
+    /// <summary>
+    /// Calcula a árvore geradora mínima a partir de um vértice inicial.
+    /// </summary>
+    /// <param name="grafo">Grafo de entrada.</param>
+    /// <param name="nomeVerticeInicial">Nome do vértice inicial.</param>
+    /// <returns>Resultado da execução do algoritmo.</returns>
+    public ResultadoPrim Calcular(Grafo grafo, string nomeVerticeInicial)
         {
             ResultadoPrim resultado = new ResultadoPrim();
 
@@ -26,33 +26,35 @@ namespace TrabalhoPOO_Grafos
                 return resultado;
             }
 
-            if (grafo.QuantidadeVertices == 0)
+            if (grafo.GetVertices().Count == 0)
             {
                 resultado.DefinirErro("O grafo não possui vértices.");
                 return resultado;
             }
-
-            if (!grafo.ContemVertice(idVerticeInicial))
+            // verifica se o vértice inicial existe
+            var vertices = grafo.GetVertices();
+            bool existeInicial = vertices.Exists(v => string.Equals(v.GetNome(), nomeVerticeInicial, StringComparison.OrdinalIgnoreCase));
+            if (!existeInicial)
             {
-                resultado.DefinirErro($"O vértice inicial '{idVerticeInicial}' não existe no grafo.");
+                resultado.DefinirErro($"O vértice inicial '{nomeVerticeInicial}' não existe no grafo.");
                 return resultado;
             }
 
-            HashSet<int> visitados = new HashSet<int>();
-            PriorityQueue<Aresta, double> filaPrioridade = new PriorityQueue<Aresta, double>();
+            HashSet<string> visitados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            PriorityQueue<Aresta, int> filaPrioridade = new PriorityQueue<Aresta, int>();
 
-            visitados.Add(idVerticeInicial);
+            visitados.Add(nomeVerticeInicial);
 
-            foreach (Aresta aresta in grafo.ObterAdjacentes(idVerticeInicial))
+            foreach (Aresta aresta in grafo.GetAdjacentes(nomeVerticeInicial))
             {
-                filaPrioridade.Enqueue(aresta, aresta.Peso);
+                filaPrioridade.Enqueue(aresta, aresta.GetPeso());
             }
 
             while (filaPrioridade.Count > 0)
             {
                 Aresta arestaAtual = filaPrioridade.Dequeue();
 
-                int proximoVertice = arestaAtual.Destino;
+                string proximoVertice = arestaAtual.GetDestino();
 
                 if (visitados.Contains(proximoVertice))
                 {
@@ -62,16 +64,16 @@ namespace TrabalhoPOO_Grafos
                 resultado.AdicionarAresta(arestaAtual);
                 visitados.Add(proximoVertice);
 
-                foreach (Aresta arestaAdjacente in grafo.ObterAdjacentes(proximoVertice))
+                foreach (Aresta arestaAdjacente in grafo.GetAdjacentes(proximoVertice))
                 {
-                    if (!visitados.Contains(arestaAdjacente.Destino))
+                    if (!visitados.Contains(arestaAdjacente.GetDestino()))
                     {
-                        filaPrioridade.Enqueue(arestaAdjacente, arestaAdjacente.Peso);
+                        filaPrioridade.Enqueue(arestaAdjacente, arestaAdjacente.GetPeso());
                     }
                 }
             }
 
-            if (visitados.Count != grafo.QuantidadeVertices)
+            if (visitados.Count != grafo.GetVertices().Count)
             {
                 resultado.Limpar();
                 resultado.DefinirErro("Não foi possível gerar a árvore geradora mínima: o grafo é desconexo.");
