@@ -4,11 +4,11 @@ namespace TrabalhoPOO_Grafos
 {
     public class LeitorCSV
     {
-        public string caminho = "ArquivosCSV/grafo_nao_direcionado_4096_vertices.csv";
+        public string caminho = "ArquivosCSV/grafo_nao_direcionado_32_vertices.csv";
 
         public LeitorCSV()
         {
-            caminho = "ArquivosCSV/grafo_nao_direcionado_4096_vertices.csv";
+            caminho = "ArquivosCSV/grafo_nao_direcionado_32_vertices.csv";
         }
 
         public LeitorCSV(string caminho)

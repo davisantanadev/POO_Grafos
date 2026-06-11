@@ -45,7 +45,7 @@ namespace TrabalhoPOO_Grafos {
 
 		public void AdicionarAresta(Aresta aresta) {
 			_arestas.Add(aresta);
-			_pesoTotal += aresta.Peso;
+			_pesoTotal += aresta.GetPeso();
 		}
 
 		public void DefinirErro(string mensagem) {
